@@ -1,0 +1,7 @@
+map b toggle_statusbar
+
+set adjust-open width
+set font "inconsolata normal 9"
+set render-loading-bg "#000000"
+set render-loading-fg "#FFF8E7"
+set window-title-basename true

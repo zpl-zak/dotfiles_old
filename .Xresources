@@ -1,0 +1,43 @@
+! ----------------------------------------------------------------------------
+! file:     ~/.Xresources
+! author:   Miblo - http://www.miblodelcarpio.co.uk/
+! modified: 2012-06-15
+! vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=xdefaults:
+! ----------------------------------------------------------------------------
+
+#include ".Xresources-softlo"
+
+Xcursor.theme:              ATER_Blue
+
+XTerm*vt100.faceName:       inconsolata
+XTerm*vt100.faceSize:       9
+
+URxvt*termName:             rxvt-256color
+URxvt.letterSpace:          -1
+URxvt.font:                 xft:inconsolata:size=9,\
+                            xft:Liberation Mono,\
+                            xft:Ricty,\
+                            xft:symbola
+URxvt.boldFont:             xft:inconsolata:bold:size=9,\
+                            xft:Liberation Mono,\
+                            xft:Ricty,\
+                            xft:symbola
+URxvt*externalBorder:       0
+URxvt*internalBorder:       0
+URxvt*saveLines:            4096
+URxvt.scrollBar:            false
+!URxvt.tabbed.tabbar-fg:     15
+!URxvt.tabbed.tabbar-bg:     0
+!URxvt.tabbed.tab-fg:        15
+!URxvt.tabbed.tab-bg:        4
+
+!URxvt.perl-ext:	            
+default,clipboard,tabbed,url-select,keyboard-select
+URxvt.perl-ext:	            default,clipboard,url-select,keyboard-select
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
+URxvt.url-select.launcher:	firefox
+URxvt.url-select.underline:	true
+URxvt*boldMode:             false
+

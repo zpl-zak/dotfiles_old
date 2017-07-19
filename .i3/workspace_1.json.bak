@@ -1,0 +1,77 @@
+{
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.8,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 316,
+               "width": 484,
+               "x": 0,
+               "y": 0
+            },
+            "name": "uxterm",
+            "percent": 0.7,
+            "swallows": [
+               {
+                "class": "^UXTerm$",
+                "instance": "^xterm$",
+                "title": "^uxterm$",
+                "transient_for": "^$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 316,
+               "width": 484,
+               "x": 0,
+               "y": 0
+            },
+            "name": "uxterm",
+            "percent": 0.3,
+            "swallows": [
+               {
+                "class": "^UXTerm$",
+                "instance": "^xterm$",
+                "title": "^uxterm$",
+                "transient_for": "^$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 5,
+       "width": 5,
+       "x": 0,
+       "y": 0
+    },
+    "name": "conky (WORKSTATION-PC)",
+    "percent": 0.2,
+    "swallows": [
+       {
+        "class": "^Conky$",
+        "instance": "^Conky$",
+        "title": "^conky\\ \\(WORKSTATION\\-PC\\)$",
+        "transient_for": "^$"
+       }
+    ],
+    "type": "con"
+}
+
