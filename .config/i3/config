@@ -45,7 +45,7 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # force_focus_wrapping no
-focus_follows_mouse no
+focus_follows_mouse yes
 new_window normal
 hide_edge_borders both
 workspace_auto_back_and_forth yes
@@ -137,6 +137,9 @@ bindsym $mod+Shift+p exec "~/ldev.sh"
 bindsym XF86AudioRaiseVolume exec amixer set Master 1%+
 bindsym XF86AudioLowerVolume exec amixer set Master 1%-
 
+# sticky
+bindsym $mod+Shift+s sticky toggle
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -174,5 +177,6 @@ bar {
 
 for_window [class="Uzbl-core"] focus child, layout stacking, focus
 
-
-exec vmware-user
+# monitor focus
+bindsym $mod+u focus output Virtual1
+bindsym $mod+i focus output Virtual2

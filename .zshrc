@@ -1,8 +1,17 @@
+#!/bin/zsh
+
 # Welcome message and prompt from:
 # https://bbs.archlinux.org/viewtopic.php?pid=1215622#p1215622
 #
 # Welcome message
 # logo taken from alsi command
+
+# Plugins
+
+plugins=(k)
+export ZSH=$HOME/.oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
 c1="$(tput sgr0)$(tput setaf 4)"
 c2="$(tput bold)$(tput setaf 4)"
 c3="$(tput bold)$(tput setaf 7)"
@@ -28,6 +37,8 @@ PS1="┭─┤%*│%{$fg_bold[green]%}%n%{$fg_bold[yellow]%}@%m:%{$fg_bold[blue]
 PS2="────╼ "
 [ -n "$RANGER_LEVEL" ] && PS1="$PS1"'(in ranger) '
 
+export ZSH=$HOME/.oh-my-zsh
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=10240
@@ -50,49 +61,31 @@ compinit
 # User specific aliases and functions
 
 #alias get_iplayer="get_iplayer --nopurge"
-alias backuparchon64="sudo rsync -auvRh archon64:/home/ /media/Earth/archon64"
-alias bashkeys="cat ~/bashkeys"
+alias backuparch="sudo rsync -auvRh /home/ /media/backup/home"
 alias boottime="systemd-analyze ; systemd-analyze blame"
 alias cp="cp --reflink=auto"
-alias dualoff="xrandr --output VGA1 --off && aumix -v 40"
-alias dualon="xrandr --output LVDS1 --auto --output VGA1 --mode 1024x768 --right-of LVDS1 && aumix -v 84"
-alias dumpaudio="mplayer -benchmark -vc null -ao pcm:fast"
 alias flac="flac --keep-foreign-metadata"
-alias mup="sudo vmhgfs-fuse -o allow_other -o auto_unmount .host:/Music /media/Music"
-alias ggid="cat ~/Documents/Employment/Jobseeker\'s\ Allowance/GGID | xclip -selection clipboard"
 alias grep="grep --colour=AUTO"
 #alias hmhstream="mpc volume 24 ; amixer set Headphone 80 ; livestreamer http://www.twitch.tv/handmade_hero best ; amixer set Headphone 71 ; mpc volume 100"
-alias identicurse="identicurse 2> ~/Software/logs/`date +%s`_identicurse.log"
-alias journaly="vim ~/Documents/creativewriting/journal/`date --date=yesterday +%F`"
 alias ll="ls -lh"
 alias logindownstairs="ssh zaklaus@archon64.lan"
 alias logindownstairsX="ssh -X zaklaus@archon64.lan"
 alias ls='ls --color=auto'
-alias mirrorsupdate="sudo reflector -c 'United Kingdom' --sort=score --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist"
+alias mirrorsupdate="sudo reflector -c 'Slovakia' --sort=score --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist"
 alias mkdir="mkdir -p"
-alias mountdownstairs="sshfs zaklaus@archon64:/home/zaklaus /home/zaklaus/archon64/"
-alias mplayer="mplayer -af scaletempo -speed 1"
-alias mplayerr="mplayer -af scaletempo -speed 1 -vf-add rotate=2"
-alias mplayertv="mplayer -af scaletempo -speed 1 -display 1:0 -fs -zoom"
-alias musiclatest="ls -tr ~/Media/Audio/Music|grep -v -e Incoming -e Playlists|tail -12"
-alias phone="vim ~/phone_`date +%F`"
-alias pokemon="mednafen '/home/zaklaus/Software/Games/ROMs/GBA/Pokemon Sapphire.GBA'"
-alias startjack="jackd -r -d alsa -r 44100"
 alias tree="tree -CA"
 alias tt++="tt++ $HOME/.ttrc"
-alias umountdownstairs="fusermount -u /home/zaklaus/archon64"
-alias wimdraw="wget http://www.wimbledon.org/en_GB/scores/draws/ms/msdraw.pdf -O /home/zaklaus/Documents/Sports/Tennis/`date +%F`-end.pdf"
 
 #export TERM="rxvt-unicode-256color"
 if [ -n "$DISPLAY" ]; then
-        export BROWSER="firefox"
+        export BROWSER="chromium"
 else 
         export BROWSER="elinks"
 fi
 export EDITOR="vim"
 export GREP_COLORS="ms=00;33:mc=00;33"
 #export IPLAYER_OUTDIR="/home/zaklaus/Media/Videos/TV Programmes/iPlayer/"
-#export MANPAGER="/bin/zsh -c \"col -bx | vim -c 'set ft=man' -\"" #http://www.reddit.com/r/vim/comments/23u4ly/what_other_apps_are_vimlike/ch0ykcy
+export MANPAGER="/bin/zsh -c \"col -bx | vim -c 'set ft=man' -\"" #http://www.reddit.com/r/vim/comments/23u4ly/what_other_apps_are_vimlike/ch0ykcy
 export PAGER="/bin/vimpager"
 export RANGER_LOAD_DEFAULT_RC="FALSE"
 export SDL_AUDIODRIVER="alsa"
@@ -114,7 +107,7 @@ cdpath=(. ~ /home/zaklaus/Documents/creativewriting)
 source /usr/share/doc/pkgfile/command-not-found.zsh
 source /home/zaklaus/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export PATH=/home/zaklaus/bin:/home/zaklaus/4coder:$PATH
+export PATH=/home/zaklaus/bin:/home/zaklaus/4coder:/home/zaklaus/git/odin:$PATH
 
 # From https://wiki.archlinux.org/index.php/Zsh#Key_Bindings
 # create a zkbd compatible hash;
@@ -164,6 +157,7 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
         zle -N zle-line-finish
 fi
 # git
+gita() { git add $1 && git status; }
 alias gitp="git push"
 alias gitpl="git pull"
 alias gitom="git push origin master"
@@ -207,3 +201,15 @@ alias ~="cd ~"                              # ~:            Go Home
 alias c='clear'                             # c:            Clear terminal display
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
+alias subl=subl3
+alias tvb='mpv --ytdl-format="bestvideo+bestaudio/best" $1'
+alias tvm='mpv --ytdl-format="bestvideo[height<=?720]+bestaudio/best" $1'
+alias tvh='mpv --ytdl-format="bestvideo[height<=?480]+bestaudio/best" $1'
+alias tvp='mpv --ytdl-format="bestvideo[height<=?360]+bestaudio/best" $1'
+tvx(){mpv --ytdl-format="$1" $2;}
+tvd(){youtube-dl -F $1;}
+
+# easy transfer
+
+# Merriam-Webster API keys
+source $HOME/.mwebrc
